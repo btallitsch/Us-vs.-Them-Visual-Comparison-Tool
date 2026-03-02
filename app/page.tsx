@@ -13,11 +13,11 @@ export default function Home() {
   const vehicleB = vehicles.find(v => v.id === vehicleBId)!;
 
   return (
-    <main className="min-h-screen px-6 py-16">
+    <main className="min-h-screen px-6 py-16 bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-50 transition-colors">
       <div className="max-w-6xl mx-auto">
 
         {/* Hero */}
-        <div className="flex justify-between items-center mb-16">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 gap-4">
           <div>
             <h1 className="text-5xl font-semibold tracking-tight mb-2">Us vs. Them</h1>
             <p className="text-neutral-500 dark:text-neutral-400 text-lg">
@@ -32,7 +32,7 @@ export default function Home() {
           <select
             value={vehicleAId}
             onChange={e => setVehicleAId(e.target.value)}
-            className="w-full p-4 rounded-2xl bg-white dark:bg-neutral-700 shadow-sm border border-neutral-200 dark:border-neutral-600 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white transition"
+            className="w-full p-4 rounded-2xl bg-white dark:bg-neutral-700 shadow-soft border border-neutral-200 dark:border-neutral-600 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white transition"
           >
             {vehicles.map(v => (
               <option key={v.id} value={v.id}>
@@ -44,7 +44,7 @@ export default function Home() {
           <select
             value={vehicleBId}
             onChange={e => setVehicleBId(e.target.value)}
-            className="w-full p-4 rounded-2xl bg-white dark:bg-neutral-700 shadow-sm border border-neutral-200 dark:border-neutral-600 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white transition"
+            className="w-full p-4 rounded-2xl bg-white dark:bg-neutral-700 shadow-soft border border-neutral-200 dark:border-neutral-600 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white transition"
           >
             {vehicles.map(v => (
               <option key={v.id} value={v.id}>
