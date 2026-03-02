@@ -4,10 +4,10 @@ export interface Vehicle {
   model: string;
   year: number;
 
-  price: number;        // lower is better
-  cityMpg: number;      // higher is better
-  highwayMpg: number;   // higher is better
-  cargo: number;        // cubic feet, higher better
-  horsepower: number;   // higher better
-  safetyRating: number; // 1–5 scale, higher better
+  price: number;        // MSRP
+  cityMpg: number;
+  highwayMpg: number;
+  cargo: number;        // cu ft
+  horsepower: number;
+  safetyRating: number; // 1-5
 }
