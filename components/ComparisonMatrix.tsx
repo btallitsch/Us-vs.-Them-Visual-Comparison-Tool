@@ -20,10 +20,7 @@ export default function ComparisonMatrix({
   const exportPDF = async () => {
     if (!pdfRef.current) return;
 
-    const canvas = await html2canvas(pdfRef.current, {
-      scale: 2,
-    });
-
+    const canvas = await html2canvas(pdfRef.current, { scale: 2 });
     const imgData = canvas.toDataURL("image/png");
 
     const pdf = new jsPDF({
@@ -32,142 +29,81 @@ export default function ComparisonMatrix({
       format: "a4",
     });
 
-    const imgProps = pdf.getImageProperties(imgData);
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight =
-      (imgProps.height * pdfWidth) / imgProps.width;
+    const width = pdf.internal.pageSize.getWidth();
+    const height =
+      (canvas.height * width) / canvas.width;
 
-    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-    pdf.save(
-      `${vehicleA.model}-vs-${vehicleB.model}.pdf`
-    );
+    pdf.addImage(imgData, "PNG", 0, 0, width, height);
+    pdf.save(`${vehicleA.model}-vs-${vehicleB.model}.pdf`);
   };
 
   const rows = [
-    {
-      label: "MSRP",
-      a: vehicleA.price,
-      b: vehicleB.price,
-      higherIsBetter: false,
-      formatter: (val: number) =>
-        `$${val.toLocaleString()}`
-    },
-    {
-      label: "City MPG",
-      a: vehicleA.cityMpg,
-      b: vehicleB.cityMpg,
-      higherIsBetter: true,
-      formatter: (val: number) => `${val} mpg`
-    },
-    {
-      label: "Highway MPG",
-      a: vehicleA.highwayMpg,
-      b: vehicleB.highwayMpg,
-      higherIsBetter: true,
-      formatter: (val: number) => `${val} mpg`
-    },
-    {
-      label: "Horsepower",
-      a: vehicleA.horsepower,
-      b: vehicleB.horsepower,
-      higherIsBetter: true,
-      formatter: (val: number) => `${val} hp`
-    },
-    {
-      label: "Cargo Space",
-      a: vehicleA.cargo,
-      b: vehicleB.cargo,
-      higherIsBetter: true,
-      formatter: (val: number) => `${val} cu ft`
-    },
-    {
-      label: "Safety Rating",
-      a: vehicleA.safetyRating,
-      b: vehicleB.safetyRating,
-      higherIsBetter: true,
-      formatter: (val: number) => `${val}/5`
-    }
+    { label: "MSRP", a: vehicleA.price, b: vehicleB.price, higherIsBetter: false, format: (v: number) => `$${v.toLocaleString()}` },
+    { label: "City MPG", a: vehicleA.cityMpg, b: vehicleB.cityMpg, higherIsBetter: true, format: (v: number) => `${v} mpg` },
+    { label: "Highway MPG", a: vehicleA.highwayMpg, b: vehicleB.highwayMpg, higherIsBetter: true, format: (v: number) => `${v} mpg` },
+    { label: "Horsepower", a: vehicleA.horsepower, b: vehicleB.horsepower, higherIsBetter: true, format: (v: number) => `${v} hp` },
+    { label: "Cargo Space", a: vehicleA.cargo, b: vehicleB.cargo, higherIsBetter: true, format: (v: number) => `${v} cu ft` },
+    { label: "Safety Rating", a: vehicleA.safetyRating, b: vehicleB.safetyRating, higherIsBetter: true, format: (v: number) => `${v}/5` },
   ];
 
-  const getClass = (result: string) => {
-    if (result === "win")
-      return "bg-green-100 text-green-800 font-semibold";
-    if (result === "lose")
-      return "bg-red-50 text-red-600";
-    return "";
-  };
+  const getClass = (result: string) =>
+    result === "win"
+      ? "bg-green-50 text-green-700"
+      : result === "lose"
+      ? "text-neutral-400"
+      : "";
 
   return (
-    <div className="w-full max-w-5xl mx-auto">
+    <div className="max-w-4xl mx-auto">
+
       <div
         ref={pdfRef}
-        className="bg-white shadow-2xl rounded-2xl p-8 border"
+        className="bg-white rounded-3xl shadow-xl p-10"
       >
-        <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">
-          {vehicleA.year} {vehicleA.make} {vehicleA.model} vs{" "}
-          {vehicleB.year} {vehicleB.make} {vehicleB.model}
+        <h2 className="text-2xl font-semibold mb-10 text-center tracking-tight">
+          {vehicleA.make} {vehicleA.model} vs {vehicleB.make} {vehicleB.model}
         </h2>
 
-        <div className="overflow-x-auto">
-          <table className="w-full border-collapse">
-            <thead>
-              <tr className="border-b">
-                <th className="text-left py-3"></th>
-                <th className="text-left py-3 font-semibold">
-                  {vehicleA.make} {vehicleA.model}
-                </th>
-                <th className="text-left py-3 font-semibold">
-                  {vehicleB.make} {vehicleB.model}
-                </th>
-              </tr>
-            </thead>
+        <div className="space-y-6">
+          {rows.map((row) => {
+            const result = compareValues(
+              row.a,
+              row.b,
+              row.higherIsBetter
+            );
 
-            <tbody>
-              {rows.map((row) => {
-                const result = compareValues(
-                  row.a,
-                  row.b,
-                  row.higherIsBetter
-                );
+            return (
+              <div
+                key={row.label}
+                className="grid grid-cols-3 items-center py-4 border-b border-neutral-100"
+              >
+                <div className="text-neutral-500">
+                  {row.label}
+                </div>
 
-                return (
-                  <tr
-                    key={row.label}
-                    className="border-t"
-                  >
-                    <td className="py-4 font-medium">
-                      {row.label}
-                    </td>
+                <div
+                  className={`text-center text-lg font-medium rounded-xl py-2 ${getClass(result.aResult)}`}
+                >
+                  {row.format(row.a)}
+                </div>
 
-                    <td
-                      className={`py-4 px-2 rounded-lg ${getClass(
-                        result.aResult
-                      )}`}
-                    >
-                      {row.formatter(row.a)}
-                    </td>
-
-                    <td
-                      className={`py-4 px-2 rounded-lg ${getClass(
-                        result.bResult
-                      )}`}
-                    >
-                      {row.formatter(row.b)}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+                <div
+                  className={`text-center text-lg font-medium rounded-xl py-2 ${getClass(result.bResult)}`}
+                >
+                  {row.format(row.b)}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
 
-      <div className="text-center mt-8">
+      <div className="text-center mt-10">
         <button
           onClick={exportPDF}
-          className="bg-black text-white px-8 py-3 rounded-xl hover:bg-gray-800 transition duration-200"
+          className="px-10 py-4 rounded-2xl bg-black text-white text-lg font-medium hover:opacity-90 transition"
         >
-          Export as PDF
+          Export PDF
         </button>
       </div>
     </div>
