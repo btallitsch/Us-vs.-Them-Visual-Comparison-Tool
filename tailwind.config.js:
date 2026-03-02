@@ -1,19 +1,37 @@
-import "./globals.css";
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
-
-export const metadata = {
-  title: "Us vs. Them — Vehicle Comparison",
-  description: "Premium vehicle comparison tool built with Next.js + TypeScript",
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  darkMode: "class",
+  content: ["./app/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          light: "#F5F5F7",
+          DEFAULT: "#1C1C1E",
+          dark: "#0A0A0C",
+        },
+        green: {
+          50: "#ECFDF3",
+          100: "#D1FAE5",
+          700: "#047857",
+        },
+        neutral: {
+          50: "#F9FAFB",
+          100: "#F3F4F6",
+          300: "#D1D5DB",
+          400: "#9CA3AF",
+          500: "#6B7280",
+          700: "#374151",
+          800: "#1F2937",
+          900: "#111827",
+        },
+      },
+      fontFamily: { sans: ["Inter", "ui-sans-serif", "system-ui"] },
+      borderRadius: { "2xl": "1.5rem", "3xl": "2rem" },
+      boxShadow: { soft: "0 4px 16px rgba(0,0,0,0.06)", medium: "0 8px 24px rgba(0,0,0,0.08)" },
+      keyframes: { fadeInUp: { "0%": { opacity: 0, transform: "translateY(10px)" }, "100%": { opacity: 1, transform: "translateY(0)" } } },
+      animation: { fadeInUp: "fadeInUp 0.5s ease-out forwards" },
+    },
+  },
+  plugins: [],
 };
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <body className={`${inter.className} bg-neutral-50 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-50`}>
-        {children}
-      </body>
-    </html>
-  );
-}
