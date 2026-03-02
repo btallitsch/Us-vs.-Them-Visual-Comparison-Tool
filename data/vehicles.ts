@@ -1,3 +1,5 @@
+import { Vehicle } from "@/types/vehicle";
+
 export const vehicles: Vehicle[] = [
   {
     id: "rav4",
@@ -9,7 +11,7 @@ export const vehicles: Vehicle[] = [
     highwayMpg: 35,
     cargo: 69.8,
     horsepower: 203,
-    safetyRating: 5
+    safetyRating: 5,
   },
   {
     id: "crv",
@@ -21,6 +23,18 @@ export const vehicles: Vehicle[] = [
     highwayMpg: 34,
     cargo: 76.5,
     horsepower: 190,
-    safetyRating: 5
-  }
+    safetyRating: 5,
+  },
+  {
+    id: "cx5",
+    make: "Mazda",
+    model: "CX-5",
+    year: 2024,
+    price: 28570,
+    cityMpg: 26,
+    highwayMpg: 31,
+    cargo: 59.3,
+    horsepower: 187,
+    safetyRating: 5,
+  },
 ];
