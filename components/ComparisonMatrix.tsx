@@ -1,5 +1,6 @@
 "use client";
 
+import { compareValues } from "@/lib/compare";
 import { Vehicle } from "@/types/vehicle";
 import { useRef } from "react";
 import jsPDF from "jspdf";
