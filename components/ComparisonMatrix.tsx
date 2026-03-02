@@ -37,8 +37,9 @@ export default function ComparisonMatrix({ vehicleA, vehicleB }: Props) {
     { label: "Safety Rating", a: vehicleA.safetyRating, b: vehicleB.safetyRating, higherIsBetter: true, format: (v: number) => `${v}/5` },
   ];
 
-  const totalWinsA = rows.filter(row => compareValues(row.a, row.b, row.higherIsBetter).aResult === "win").length;
-  const totalWinsB = rows.filter(row => compareValues(row.a, row.b, row.higherIsBetter).bResult === "win").length;
+  const totalWinsA = rows.filter(r => compareValues(r.a, r.b, r.higherIsBetter).aResult === "win").length;
+  const totalWinsB = rows.filter(r => compareValues(r.a, r.b, r.higherIsBetter).bResult === "win").length;
+
   let overallWinner: Vehicle | null = null;
   if (totalWinsA > totalWinsB) overallWinner = vehicleA;
   if (totalWinsB > totalWinsA) overallWinner = vehicleB;
@@ -55,14 +56,14 @@ export default function ComparisonMatrix({ vehicleA, vehicleB }: Props) {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="bg-black dark:bg-white text-white dark:text-black p-4 rounded-2xl text-center mb-6 font-semibold text-lg"
+            className="bg-black dark:bg-white text-white dark:text-black p-4 rounded-2xl text-center mb-6 font-semibold text-lg animate-fadeInUp"
           >
             Overall Advantage: {overallWinner.make} {overallWinner.model}
           </motion.div>
         )}
       </AnimatePresence>
 
-      <div ref={pdfRef} className="bg-white dark:bg-neutral-800 rounded-3xl shadow-xl p-10">
+      <div ref={pdfRef} className="bg-white dark:bg-neutral-800 rounded-3xl shadow-medium p-10">
         <h2 className="text-2xl font-semibold mb-10 text-center tracking-tight dark:text-neutral-100">
           {vehicleA.make} {vehicleA.model} vs {vehicleB.make} {vehicleB.model}
         </h2>
@@ -102,7 +103,7 @@ export default function ComparisonMatrix({ vehicleA, vehicleB }: Props) {
       <div className="text-center mt-10">
         <button
           onClick={exportPDF}
-          className="px-10 py-4 rounded-2xl bg-black text-white text-lg font-medium hover:opacity-90 transition"
+          className="px-10 py-4 rounded-2xl bg-black dark:bg-white text-white dark:text-black text-lg font-medium hover:opacity-90 transition"
         >
           Export PDF
         </button>
