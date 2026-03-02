@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { vehicles } from "@/data/vehicles";
 import ComparisonMatrix from "@/components/ComparisonMatrix";
+import DarkModeToggle from "@/components/DarkModeToggle";
 
 export default function Home() {
   const [vehicleAId, setVehicleAId] = useState("rav4");
@@ -16,23 +17,24 @@ export default function Home() {
       <div className="max-w-6xl mx-auto">
 
         {/* Hero */}
-        <div className="text-center mb-16">
-          <h1 className="text-5xl font-semibold tracking-tight mb-4">
-            Us vs. Them
-          </h1>
-          <p className="text-neutral-500 text-lg">
-            A clean, professional vehicle comparison experience.
-          </p>
+        <div className="flex justify-between items-center mb-16">
+          <div>
+            <h1 className="text-5xl font-semibold tracking-tight mb-2">Us vs. Them</h1>
+            <p className="text-neutral-500 dark:text-neutral-400 text-lg">
+              Clean, professional vehicle comparison experience.
+            </p>
+          </div>
+          <DarkModeToggle />
         </div>
 
         {/* Selectors */}
         <div className="grid md:grid-cols-2 gap-6 mb-12">
           <select
             value={vehicleAId}
-            onChange={(e) => setVehicleAId(e.target.value)}
-            className="w-full p-4 rounded-2xl bg-white shadow-sm border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-black transition"
+            onChange={e => setVehicleAId(e.target.value)}
+            className="w-full p-4 rounded-2xl bg-white dark:bg-neutral-700 shadow-sm border border-neutral-200 dark:border-neutral-600 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white transition"
           >
-            {vehicles.map((v) => (
+            {vehicles.map(v => (
               <option key={v.id} value={v.id}>
                 {v.year} {v.make} {v.model}
               </option>
@@ -41,10 +43,10 @@ export default function Home() {
 
           <select
             value={vehicleBId}
-            onChange={(e) => setVehicleBId(e.target.value)}
-            className="w-full p-4 rounded-2xl bg-white shadow-sm border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-black transition"
+            onChange={e => setVehicleBId(e.target.value)}
+            className="w-full p-4 rounded-2xl bg-white dark:bg-neutral-700 shadow-sm border border-neutral-200 dark:border-neutral-600 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white transition"
           >
-            {vehicles.map((v) => (
+            {vehicles.map(v => (
               <option key={v.id} value={v.id}>
                 {v.year} {v.make} {v.model}
               </option>
@@ -53,7 +55,6 @@ export default function Home() {
         </div>
 
         <ComparisonMatrix vehicleA={vehicleA} vehicleB={vehicleB} />
-
       </div>
     </main>
   );
