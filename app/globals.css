@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Optional: smoother font rendering */
+/* Optional smooth font rendering */
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
