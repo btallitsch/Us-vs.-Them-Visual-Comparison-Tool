@@ -1,9 +1,132 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* globals.css */
 
-/* Optional smooth font rendering */
-html {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #F9FAFB;
+  color: #111827;
+  margin: 0;
+  padding: 0;
+}
+
+.dark body {
+  background-color: #111827;
+  color: #F9FAFB;
+}
+
+button {
+  cursor: pointer;
+  font-weight: 500;
+}
+
+select {
+  font-size: 16px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.card {
+  background-color: #FFFFFF;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  margin-bottom: 2rem;
+  transition: background-color 0.3s ease;
+}
+
+.dark .card {
+  background-color: #1F2937;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+h1 {
+  font-size: 3rem;
+  margin: 0;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.select-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+select {
+  flex: 1;
+  padding: 1rem;
+  border-radius: 1.5rem;
+  border: 1px solid #D1D5DB;
+  transition: border-color 0.2s;
+}
+
+select:focus {
+  border-color: #000000;
+  outline: none;
+}
+
+.matrix-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 1rem 0;
+  border-bottom: 1px solid #E5E7EB;
+  align-items: center;
+}
+
+.matrix-row:last-child {
+  border-bottom: none;
+}
+
+.matrix-label {
+  color: #6B7280;
+}
+
+.matrix-value {
+  text-align: center;
+  font-weight: 600;
+  padding: 0.5rem;
+  border-radius: 1rem;
+}
+
+.win {
+  background-color: #DCFCE7;
+  color: #047857;
+}
+
+.lose {
+  color: #9CA3AF;
+}
+
+.export-btn {
+  display: block;
+  margin: 2rem auto 0 auto;
+  padding: 1rem 2rem;
+  border-radius: 1.5rem;
+  background-color: #000;
+  color: #FFF;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+
+.export-btn:hover {
+  opacity: 0.9;
+}
+
+.dark .export-btn {
+  background-color: #FFF;
+  color: #000;
 }
