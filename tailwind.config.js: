@@ -1,60 +1,27 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: "class", // enable dark mode via class
+  darkMode: "class",
   content: [
-    "./app/**/*.{js,ts,jsx,tsx}",        // App directory files
-    "./components/**/*.{js,ts,jsx,tsx}", // Components
-    "./pages/**/*.{js,ts,jsx,tsx}",      // Optional if pages dir exists
+    "./app/**/*.{ts,tsx,js,jsx}",
+    "./components/**/*.{ts,tsx,js,jsx}",
+    "./pages/**/*.{ts,tsx,js,jsx}"
   ],
   theme: {
     extend: {
       colors: {
-        primary: {
-          light: "#F5F5F7", // subtle light background
-          DEFAULT: "#1C1C1E", // main dark accent
-          dark: "#0A0A0C", // deep dark accent
-        },
-        green: {
-          50: "#ECFDF3",
-          100: "#D1FAE5",
-          700: "#047857",
-        },
-        neutral: {
-          50: "#F9FAFB",
-          100: "#F3F4F6",
-          300: "#D1D5DB",
-          400: "#9CA3AF",
-          500: "#6B7280",
-          700: "#374151",
-          800: "#1F2937",
-          900: "#111827",
-        },
+        primary: "#1C1C1E",
+        neutral: { 50: "#F9FAFB", 100: "#F3F4F6", 300: "#D1D5DB", 400: "#9CA3AF", 500: "#6B7280", 700: "#374151", 800: "#1F2937", 900: "#111827" },
+        green: { 50: "#ECFDF3", 100: "#D1FAE5", 700: "#047857" }
       },
-      fontFamily: {
-        sans: ["Inter", "ui-sans-serif", "system-ui"],
-      },
-      borderRadius: {
-        "2xl": "1.5rem",
-        "3xl": "2rem",
-      },
-      boxShadow: {
-        soft: "0 4px 16px rgba(0,0,0,0.06)",
-        medium: "0 8px 24px rgba(0,0,0,0.08)",
-      },
+      fontFamily: { sans: ["Inter", "ui-sans-serif", "system-ui"] },
+      borderRadius: { "2xl": "1.5rem", "3xl": "2rem" },
+      boxShadow: { soft: "0 4px 16px rgba(0,0,0,0.06)", medium: "0 8px 24px rgba(0,0,0,0.08)" },
       keyframes: {
-        fadeInUp: {
-          "0%": { opacity: 0, transform: "translateY(10px)" },
-          "100%": { opacity: 1, transform: "translateY(0)" },
-        },
+        fadeInUp: { "0%": { opacity: 0, transform: "translateY(10px)" }, "100%": { opacity: 1, transform: "translateY(0)" } }
       },
-      animation: {
-        fadeInUp: "fadeInUp 0.5s ease-out forwards",
-      },
-      transitionProperty: {
-        height: "height",
-        spacing: "margin, padding",
-      },
-    },
+      animation: { fadeInUp: "fadeInUp 0.5s ease-out forwards" },
+      transitionProperty: { height: "height", spacing: "margin, padding" }
+    }
   },
   plugins: [],
 };
